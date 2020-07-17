@@ -48,19 +48,22 @@ namespace DHS
             if(Payer != null)
                 EligibilityPage.Select_InsuranceCompany(Payer);
 
-
+            //If the Payer isnt available, a popup should be displayed
             if (availablePayer == false)
             {
                 EligibilityPage.Assert_PayerNotAvailablePopup_IsDisplayed();
                 Assert.Pass();
             }
 
+            //Input National Id
             if (NationalId != null)
                 EligibilityPage.Input_NationalID(NationalId);
 
+            //Assert the specilaity dropdwon is empty if no payer is selected
             if (Payer == null)
                 EligibilityPage.Assert_SpecialityOptions_NotDisplayed();
 
+            //Else, select speciality
             else
             {
 
@@ -69,6 +72,7 @@ namespace DHS
                     Thread.Sleep(2000);
                     EligibilityPage.Select_Speciality(Speciality);
 
+                    //If speciality is selected, select sub speciality
                     if (SubSpeciality != null)
                     {
                         Thread.Sleep(2000);
